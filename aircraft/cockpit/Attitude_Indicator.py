@@ -7,17 +7,21 @@ from PyQt4 import QtCore, QtGui
 
 
 ## widget that appears top left and right
-class ADI_Button_Indicator(QtGui.QWidget):
+class ADI_Button_Indicator(QtGui.QFrame):
 
     def __init__(self, label, color, parent=None):
         QtGui.QWidget.__init__(self, parent)
 
-        self.setStyleSheet("border: 1px outset #efefef")
+        #self.setStyleSheet("border: 1px outset #efefef")
+        self.setProperty("class", QtCore.QVariant("ADI_Button_Indicator") )
+        self.setFixedSize(30, 40)
 
         vBox = QtGui.QVBoxLayout(self)
         self.setLayout( vBox)
 
         self.label = QtGui.QLabel(label)
+        self.label.setAlignment(QtCore.Qt.AlignCenter )
+        self.label.setProperty("class", QtCore.QVariant("PFD_IndButton") )
         vBox.addWidget( self.label )
 
         self.light = QtGui.QLabel(" ")
@@ -30,6 +34,8 @@ class ADI_Main_Central(QtGui.QWidget):
 
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
+
+        self.setProperty("class", QtCore.QVariant("panel") )
 
         gridLayout = QtGui.QGridLayout()
         gridLayout.setColumnStretch(1, 2)
@@ -46,7 +52,7 @@ class ADI_Main_Central(QtGui.QWidget):
         self.headingSlider.setValue(40)
         self.headingSlider.setTickInterval( 20 )
         self.headingSlider.setTickPosition(QtGui.QSlider.TicksBelow)
-        self.headingSlider.setStyleSheet("background-color: #bbbbbb")
+        #self.headingSlider.setStyleSheet("background-color: #bbbbbb")
         gridLayout.addWidget(self.headingSlider, 0, 1, 1, 4)
 
         self.leftSlider = QtGui.QSlider(QtCore.Qt.Vertical, self)
@@ -55,7 +61,7 @@ class ADI_Main_Central(QtGui.QWidget):
         self.leftSlider.setValue(2)
         self.leftSlider.setTickInterval( 1 )
         self.leftSlider.setTickPosition(QtGui.QSlider.TicksBelow)
-        self.leftSlider.setStyleSheet("background-color: #bbbbbb")
+        #self.leftSlider.setStyleSheet("background-color: #bbbbbb")
         gridLayout.addWidget(self.leftSlider, 1, 0, 2, 1)
 
 
@@ -65,7 +71,7 @@ class ADI_Main_Central(QtGui.QWidget):
         self.rightSlider.setValue(3)
         self.rightSlider.setTickInterval( 1 )
         self.rightSlider.setTickPosition(QtGui.QSlider.TicksLeft)
-        self.rightSlider.setStyleSheet("background-color: #bbbbbb")
+        #self.rightSlider.setStyleSheet("background-color: #bbbbbb")
         gridLayout.addWidget(self.rightSlider, 1, 5, 2, 1)
 
 
@@ -75,26 +81,48 @@ class ADI_Main_Central(QtGui.QWidget):
         self.bottomSlider.setValue(1)
         self.bottomSlider.setTickInterval( 1 )
         self.bottomSlider.setTickPosition(QtGui.QSlider.TicksAbove)
-        self.bottomSlider.setStyleSheet("background-color: #bbbbbb")
+        #self.bottomSlider.setStyleSheet("background-color: #bbbbbb")
         gridLayout.addWidget(self.bottomSlider, 3, 2, 1, 2)
 
-        self.middleWidgetTop = QtGui.QLabel("---- X ----")
-        self.middleWidgetTop.setStyleSheet("background-color: #239EE1;")
-        gridLayout.addWidget(self.middleWidgetTop, 1, 1, 1, 4, QtCore.Qt.AlignCenter)
+        #self.middleWidgetTop = QtGui.QLabel("---- X ----")
+        #self.middleWidgetTop.setStyleSheet("background-color: #239EE1;")
+        #gridLayout.addWidget(self.middleWidgetTop, 1, 1, 1, 4, QtCore.Qt.AlignCenter)
 
-        self.middleWidgetBottom = QtGui.QLabel("---- X ----")
-        self.middleWidgetBottom.setStyleSheet("background-color: #85623C; margin: 0px;")
-        gridLayout.addWidget(self.middleWidgetBottom, 2, 1, 1, 4, QtCore.Qt.AlignCenter)
+        #self.middleWidgetBottom = QtGui.QLabel("---- X ----")
+        #self.middleWidgetBottom.setStyleSheet("background-color: #85623C; margin: 0px;")
+        #gridLayout.addWidget(self.middleWidgetBottom, 2, 1, 1, 4, QtCore.Qt.AlignCenter)
 
+        self.middleWidget = Attitude_MiddleBlock()
+        gridLayout.addWidget( self.middleWidget, 1, 1, 2, 4, QtCore.Qt.AlignCenter)
 
-
-## Main interface
-class Attitude_Indicator(QtGui.QWidget):
+class Attitude_MiddleBlock(QtGui.QWidget):
 
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
 
+        layout = QtGui.QVBoxLayout()
+        self.setLayout( layout )
 
+        self.middleWidgetTop = QtGui.QLabel("---- Top ----")
+        self.middleWidgetTop.setStyleSheet("background-color: #239EE1;")
+        self.middleWidgetTop.setFixedSize( 150, 75 )
+        #gridLayout.addWidget(self.middleWidgetTop, 1, 1, 1, 4, QtCore.Qt.AlignCenter)
+        layout.addWidget( self.middleWidgetTop)
+
+        self.middleWidgetBottom = QtGui.QLabel("---- X ----")
+        self.middleWidgetBottom.setStyleSheet("background-color: #85623C;")
+        self.middleWidgetBottom.setFixedSize( 150, 75 )
+        #gridLayout.addWidget(self.middleWidgetBottom, 2, 1, 1, 4, QtCore.Qt.AlignCenter)
+        layout.addWidget( self.middleWidgetBottom)
+
+
+## Main interface
+class Attitude_Indicator(QtGui.QGroupBox):
+
+    def __init__(self, parent=None):
+        QtGui.QWidget.__init__(self, parent)
+
+        self.setObjectName("PFD_Main")
         gridLayout = QtGui.QGridLayout()
         self.setLayout( gridLayout )
 

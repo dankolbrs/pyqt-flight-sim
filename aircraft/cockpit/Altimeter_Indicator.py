@@ -7,7 +7,7 @@ from PyQt4 import QtCore, QtGui
 
 
 ## Main Dial
-class Altimeter_Indicator(QtGui.QWidget):
+class Altimeter_Indicator(QtGui.QGroupBox):
 
     def __init__(self,  parent=None):
         QtGui.QWidget.__init__(self, parent)
@@ -15,10 +15,10 @@ class Altimeter_Indicator(QtGui.QWidget):
         layout = QtGui.QGridLayout()
         self.setLayout( layout )
 
-
-        self.label = QtGui.QLabel("Altimeter")
-        layout.addWidget( self.label, 0, 0, 1, 3, QtCore.Qt.AlignCenter )
-
+        self.setTitle("Altimeter")
+        #self.label = QtGui.QLabel("Altimeter")
+        #layout.addWidget( self.label, 0, 0, 1, 3, QtCore.Qt.AlignCenter )
+        self.setFixedWidth(200)
 
 
         self.mainDial = QtGui.QDial()
@@ -28,7 +28,7 @@ class Altimeter_Indicator(QtGui.QWidget):
         self.mainDial.setNotchesVisible(True)
         self.mainDial.setSingleStep(10)
         self.mainDial.setWrapping(False)
-        self.mainDial.setFixedSize( 200, 200)
+        #self.mainDial.setFixedSize( 200, 200)
         layout.addWidget( self.mainDial, 1, 0, 1, 2, QtCore.Qt.AlignCenter )
 
         self.sideLabel = QtGui.QLabel("220")

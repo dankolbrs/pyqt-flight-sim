@@ -7,7 +7,7 @@ from PyQt4 import QtCore, QtGui
 
 
 ## Main Dial
-class Turn_Bank_Indicator(QtGui.QWidget):
+class Turn_Bank_Indicator(QtGui.QGroupBox):
 
     def __init__(self,  parent=None):
         QtGui.QWidget.__init__(self, parent)
@@ -15,9 +15,9 @@ class Turn_Bank_Indicator(QtGui.QWidget):
         layout = QtGui.QGridLayout()
         self.setLayout( layout )
 
-
-        self.label = QtGui.QLabel("Bank")
-        layout.addWidget( self.label, 0, 0, QtCore.Qt.AlignCenter )
+        self.setTitle("Bank")
+        #self.label = QtGui.QLabel("Bank")
+        #layout.addWidget( self.label, 0, 0, QtCore.Qt.AlignCenter )
 
 
 

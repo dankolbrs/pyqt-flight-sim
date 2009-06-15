@@ -1,0 +1,54 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+QFrame[class="ADI_Button_Indicator"] {
+    border: 1px outset #444444;
+}
+
+QDial {
+    background-color: black;
+    color: white;
+
+}
+
+QLabel[class="headerLabel"] {
+    background-color: #333333;
+    color: yellow;
+    border: 1px solid outset;
+
+}
+QLabel[class="PFD_IndButton"] {
+    color: white;
+}
+
+QSlider {
+    color: #dddddd;
+    padding: 5px;
+    margin: 1px;
+}
+
+
+
+
+ QGroupBox {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #444444, stop: 1 #888888);
+    border: 2px solid gray;
+    border-radius: 5px;
+    margin-top: 10px; /* leave space at the top for the title */
+    padding: 10;
+ }
+
+ QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center; /* position at the top center */
+    padding: 3px 3px;
+    /* background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #FFOECE, stop: 1 #FFFFFF); */
+    color: #bbbbbb;
+ }
+
+QWidget#InstrumentPanel {
+    background-color: black;
+}

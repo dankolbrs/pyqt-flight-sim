@@ -19,8 +19,14 @@ class Basic_T(QtGui.QWidget):
     def __init__(self,  parent=None):
         QtGui.QWidget.__init__(self, parent)
 
+        self.setObjectName("InstrumentPanel")
+
         gridLayout = QtGui.QGridLayout()
         self.setLayout( gridLayout )
+
+        gridLayout.setColumnStretch(0, 3)
+        gridLayout.setColumnStretch(1, 5)
+        gridLayout.setColumnStretch(2, 1)
 
         self.airspeedIndicator = Airspeed_Indicator()
         gridLayout.addWidget( self.airspeedIndicator, 0, 0 )
@@ -44,7 +50,10 @@ class Basic_T(QtGui.QWidget):
 
 if __name__ == '__main__':
 
+    styleSheetString = open('style/cockpit.txt').read()
+    #print styleSheetString
     app = QtGui.QApplication(sys.argv)
+    app.setStyleSheet( styleSheetString )
 
     widget =  Basic_T()
     widget.show()
