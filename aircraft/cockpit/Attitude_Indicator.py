@@ -89,7 +89,7 @@ class ADI_Main_Central(QtGui.QWidget):
 
 
 ## Main interface
-class ADI(QtGui.QWidget):
+class Attitude_Indicator(QtGui.QWidget):
 
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
@@ -120,7 +120,7 @@ if __name__ == '__main__':
 
     app = QtGui.QApplication(sys.argv)
 
-    widget =  ADI()
+    widget =  Attitude_Indicator()
     widget.show()
 
     sys.exit(app.exec_())
