@@ -23,7 +23,7 @@ class Heading_Indicator(QtGui.QGroupBox):
 
         self.headingDial = QtGui.QDial()
         self.headingDial.setMinimum( 0)
-        self.headingDial.setMaximum( 360 )
+        self.headingDial.setMaximum( 359 )
         self.headingDial.setValue( 200 )
         self.headingDial.setNotchesVisible(True)
         self.headingDial.setSingleStep(20)
