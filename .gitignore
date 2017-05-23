@@ -1,0 +1,6 @@
+# pycharm dir
+.idea/
+
+# virtualenvironment
+.venv/
+*__pycache__*

@@ -3,25 +3,26 @@
 """Airspeed Indicator"""
 
 import sys
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 ## Main Dial
-class Compass_Indicator(QtGui.QWidget):
+class Compass_Indicator(QtWidgets.QGroupBox):
 
     def __init__(self,  parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
 
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         self.setLayout( layout )
 
 
-        self.label = QtGui.QLabel("Compass")
+        self.label = QtWidgets.QLabel("Compass")
+        self.setTitle("Compass")
         layout.addWidget( self.label, 0, 0, QtCore.Qt.AlignCenter )
 
 
 
-        self.compassDial = QtGui.QDial()
+        self.compassDial = QtWidgets.QDial()
         self.compassDial.setMinimum( 0)
         self.compassDial.setMaximum( 360 )
         self.compassDial.setValue( 220 )
@@ -30,13 +31,13 @@ class Compass_Indicator(QtGui.QWidget):
         self.compassDial.setWrapping(True)
         layout.addWidget( self.compassDial, 1, 0, QtCore.Qt.AlignCenter )
 
-        self.labelSpeed = QtGui.QLabel("170")
+        self.labelSpeed = QtWidgets.QLabel("170")
         layout.addWidget( self.labelSpeed, 2, 0, QtCore.Qt.AlignCenter )
 
 
 if __name__ == '__main__':
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     widget =  Compass_Indicator()
     widget.show()
