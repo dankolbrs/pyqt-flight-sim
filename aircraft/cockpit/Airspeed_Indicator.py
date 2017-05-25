@@ -3,82 +3,64 @@
 """Airspeed Indicator"""
 
 import sys
-from PyQt5 import QtCore, QtWidgets
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QGroupBox, QWidget, QLabel, QDial
+from PyQt5.QtWidgets import QGridLayout, QApplication
 
 
+# Main Dial
+class Airspeed_Indicator(QGroupBox):
 
-
-## Main Dial
-class Airspeed_Indicator(QtWidgets.QGroupBox):
-
-    def __init__(self,  parent=None):
-        QtWidgets.QWidget.__init__(self, parent)
+    def __init__(self, parent=None):
+        QWidget.__init__(self, parent)
 
         self.debug = True
-
-        layout = QtWidgets.QGridLayout()
-        self.setLayout( layout )
-
+        layout = QGridLayout()
+        self.setLayout(layout)
         self.setTitle("Airspeed")
-
-        #self.label = QtWidgetsQLabel("Airspeed")
-        #layout.addWidget( self.label, 0, 0, QtCore.Qt.AlignCenter )
         self.setFixedWidth(200)
+        self.styleSheetText = "border: 2px solid #999999; color: magenta;" \
+                              " padding: 3px; font-weight: bold; margin: 5px;"
 
+        # Text output
+        self.labelSpeed = QLabel("170")
+        self.labelSpeed.setStyleSheet(self.styleSheetText)
+        # layout.addWidget( self.labelSpeed, 0, 0, QtCore.Qt.AlignCenter )
+        layout.addWidget(self.labelSpeed, 0, 0, Qt.AlignCenter)
 
-        self.labelSpeed = QtWidgets.QLabel("170")
-        self.labelSpeed.setStyleSheet("border: 2px solid #999999; color: magenta; padding: 3px; font-weight: bold; margin: 5px;")
-        self.labelSpeed.setFixedWidth( 60 )
-        self.labelSpeed.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget( self.labelSpeed, 0, 2, 1, 1, QtCore.Qt.AlignCenter )
-
-        self.speedDial = QtWidgets.QDial()
-        self.speedDial.setMinimum( 0)
-        self.speedDial.setMaximum( 500 )
-        self.speedDial.setValue( 170 )
+        # Speed dial
+        self.speedDial = QDial()
+        self.speedDial.setMinimum(0)
+        self.speedDial.setMaximum(200)
+        self.speedDial.setValue(170)
         self.speedDial.setNotchesVisible(True)
         self.speedDial.setSingleStep(50)
-        self.speedDial.setWrapping(False)
-        #self.speedDial.setFixedWidth( 220 )
-        # self.connect(self.speedDial, QtCore.SIGNAL("valueChanged(int)"), self.on_speed_change)
-        layout.addWidget( self.speedDial, 1, 0, 1, 3, QtCore.Qt.AlignCenter )
+        self.speedDial.setWrapping(True)
+        layout.addWidget(self.speedDial, 1, 0, Qt.AlignCenter)
 
-        sty = "color: white;"
-        self.labelMin = QtWidgets.QLabel( str(self.speedDial.minimum()) )
-        self.labelMin.setStyleSheet( sty )
-        self.labelMax = QtWidgets.QLabel( str(self.speedDial.maximum()) )
-        self.labelMax.setStyleSheet( sty )
-
-        layout.addWidget( self.labelMin, 2, 0, QtCore.Qt.AlignRight )
-        layout.addWidget( self.labelMax, 2, 2, QtCore.Qt.AlignLeft )
-
-        #layout.addWidget ( QtWidgetsQSpacerItem(), 2, 0 )
-        #layout.setRowStretch(3, 10 )
-        self.chkSpeedAutopilotRequestActive = QtWidgets.QCheckBox("Switch", self)
-        layout.addWidget( self.chkSpeedAutopilotRequestActive, 3, 1, 1, 2)
-
-        self.chkSpeedAutopilotActive = QtWidgets.QCheckBox("Speed Active", self)
-        layout.addWidget( self.chkSpeedAutopilotActive, 3, 3, 1, 2)
-
+        self.update_speed(750)
 
     def update_speed(self, knots):
+        '''
+        Provides function to update Airspeed indicator dial and label
+        :param knots: Speed to update to
+        :return: void
+        '''
+
         if self.debug:
             print("airspeed update", knots)
-        #self.speedDial.setValue( int(knots) )
+        self.labelSpeed.setText(str(int(knots)))
+        if int(knots) <= self.speedDial.minimum():
+            self.speedDial.setValue(self.speedDial.minimum())
+        elif int(knots) >= self.speedDial.maximum():
+            self.speedDial.setValue(self.speedDial.maximum())
+        else:
+            self.speedDial.setValue(int(knots))
 
-    def update_autopilot(self, state):
-        if self.debug:
-            print("airspeed autopilot update", state, bool(state), state == "1")
-        self.chkSpeedAutopilotActive.setChecked( state == "1" )
-
-    def on_speed_change(self, newVal):
-        self.labelSpeed.setText( str(newVal) )
 
 if __name__ == '__main__':
-
-    app = QtWidgets.QApplication(sys.argv)
-
-    widget =  Airspeed_Indicator()
+    app = QApplication(sys.argv)
+    widget = Airspeed_Indicator()
     widget.show()
-
     sys.exit(app.exec_())
