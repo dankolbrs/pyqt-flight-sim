@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QGridLayout, QApplication
 
 
 # Main Dial
-class Airspeed_Indicator(QGroupBox):
+class AirspeedIndicator(QGroupBox):
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
@@ -26,7 +26,6 @@ class Airspeed_Indicator(QGroupBox):
         # Text output
         self.labelSpeed = QLabel("170")
         self.labelSpeed.setStyleSheet(self.styleSheetText)
-        # layout.addWidget( self.labelSpeed, 0, 0, QtCore.Qt.AlignCenter )
         layout.addWidget(self.labelSpeed, 0, 0, Qt.AlignCenter)
 
         # Speed dial
@@ -61,6 +60,6 @@ class Airspeed_Indicator(QGroupBox):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    widget = Airspeed_Indicator()
+    widget = AirspeedIndicator()
     widget.show()
     sys.exit(app.exec_())

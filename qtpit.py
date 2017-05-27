@@ -1,14 +1,13 @@
-from aircraft.cockpit.Basic_T import Basic_T
+from aircraft.cockpit.Basic_T import BasicT
 
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication
+
 import sys
 
 if __name__ == '__main__':
     styleSheetString = open('aircraft/cockpit/style/cockpit.txt').read()
-    app = QtWidgets.QApplication(sys.argv)
-    app.setStyleSheet( styleSheetString )
-
-    widget =  Basic_T()
+    app = QApplication(sys.argv)
+    app.setStyleSheet(styleSheetString)
+    widget = BasicT()
     widget.show()
-
     sys.exit(app.exec_())

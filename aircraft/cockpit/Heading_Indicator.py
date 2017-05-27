@@ -4,16 +4,18 @@
 
 import sys
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QGroupBox, QWidget, QGridLayout, QDial, QApplication
+from PyQt5.QtWidgets import QGroupBox, QWidget, QGridLayout
+from PyQt5.QtWidgets import QDial, QApplication
+
 
 # Main Dial
-class Heading_Indicator(QGroupBox):
+class HeadingIndicator(QGroupBox):
 
     def __init__(self,  parent=None):
         QWidget.__init__(self, parent)
 
         layout = QGridLayout()
-        self.setLayout( layout )
+        self.setLayout(layout)
 
         self.setTitle("Heading")
 
@@ -33,6 +35,6 @@ class Heading_Indicator(QGroupBox):
 if __name__ == '__main__':
 
     app = QApplication(sys.argv)
-    widget = Heading_Indicator()
+    widget = HeadingIndicator()
     widget.show()
     sys.exit(app.exec_())

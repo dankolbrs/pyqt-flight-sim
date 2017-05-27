@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""ControlSurfaces Indicator"""
+"""Trim Indicator"""
 
 import sys
 from PyQt5.QtCore import Qt
@@ -9,13 +9,12 @@ from PyQt5.QtWidgets import QLabel, QSlider, QApplication
 
 
 # Main Dial
-class ControlSurfaces(QGroupBox):
+class TrimIndicator(QGroupBox):
 
     def __init__(self,  parent=None):
         QWidget.__init__(self, parent)
-
         self.setMinimumHeight(200)
-        self.setTitle("Control Surfaces")
+        self.setTitle("Trim Indicator")
         gridLayout = QGridLayout()
         self.setLayout(gridLayout)
 
@@ -71,6 +70,6 @@ class ControlSurfaces(QGroupBox):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    widget = ControlSurfaces()
+    widget = TrimIndicator()
     widget.show()
     sys.exit(app.exec_())

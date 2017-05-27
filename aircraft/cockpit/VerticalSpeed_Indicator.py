@@ -1,36 +1,37 @@
 # -*- coding: utf-8 -*-
 
-"""VerticalSpeed_Indicator Indicator"""
+"""VerticalSpeed Indicator"""
 
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QGroupBox, QWidget, QGridLayout
+from PyQt5.QtWidgets import QDial, QApplication, QLabel
 
 
-## Main Dial
-class VerticalSpeed_Indicator(QtWidgets.QGroupBox):
+# Main Dial
+class VerticalSpeedIndicator(QGroupBox):
 
     def __init__(self,  parent=None):
-        QtWidgets.QWidget.__init__(self, parent)
+        QWidget.__init__(self, parent)
 
-        layout = QtWidgets.QGridLayout()
+        layout = QGridLayout()
         self.setLayout(layout)
         self.setTitle("Vertical Speed")
 
-        self.labelSpeed = QtWidgets.QLabel("170")
+        self.labelSpeed = QLabel("170")
         self.styleSheetText = "border: 2px solid #999999; color: magenta;" \
                               " padding: 3px; font-weight: bold; margin: 5px;"
         self.labelSpeed.setStyleSheet(self.styleSheetText)
-        layout.addWidget(self.labelSpeed, 0, 0, QtCore.Qt.AlignCenter)
+        layout.addWidget(self.labelSpeed, 0, 0, Qt.AlignCenter)
 
-        self.speedDial = QtWidgets.QDial()
+        self.speedDial = QDial()
         self.speedDial.setMinimum(-4000)
         self.speedDial.setMaximum(4000)
         self.speedDial.setValue(270)
         self.speedDial.setNotchesVisible(True)
         self.speedDial.setSingleStep(10)
         self.speedDial.setWrapping(True)
-        layout.addWidget(self.speedDial, 1, 0, QtCore.Qt.AlignCenter)
-
+        layout.addWidget(self.speedDial, 1, 0, Qt.AlignCenter)
 
     def update_vertical(self, fpm):
         self.labelSpeed.setText(str(int(fpm)))
@@ -43,10 +44,7 @@ class VerticalSpeed_Indicator(QtWidgets.QGroupBox):
 
 
 if __name__ == '__main__':
-
-    app = QtWidgets.QApplication(sys.argv)
-
-    widget =  VerticalSpeed_Indicator()
+    app = QApplication(sys.argv)
+    widget = VerticalSpeedIndicator()
     widget.show()
-
     sys.exit(app.exec_())
